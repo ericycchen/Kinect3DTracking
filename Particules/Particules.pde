@@ -1,4 +1,4 @@
-int pnum = 10;
+int pnum = 500;
 Particule ps[];
 PVector gravity = new PVector( 0,1 );
 
@@ -14,7 +14,7 @@ void setup() {
 void draw() {
   //background( 0 );
   float a = frameCount * 0.005;
-  //gravity.set( cos(a), sin(a) );
+  gravity.set( cos(a), sin(a) );
   for ( int i = 0; i < pnum; ++i ) {
     //ps[ i ].setInit( mouseX, mouseY );
     ps[ i ].draw();
