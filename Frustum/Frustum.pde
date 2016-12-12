@@ -21,24 +21,24 @@ float rotation_speed = 0.002;
 
 void setup() {
 
-  size( 1200, 600, P3D);
+  size( 1280, 600, P3D);
   
   cp5 = new ControlP5(this);
   
   int spgap = 16;
   int sp = 10;
-  cp5.addSlider("world_size").setPosition(10,sp).setRange( 100, 10000 ); sp += spgap;
+  cp5.addSlider("world_size").setPosition(10,sp).setRange( 100, 5000 ); sp += spgap;
   cp5.addSlider("offset_z").setPosition(10,sp).setRange( -500, 500 ); sp += spgap;
   sp += spgap;
   cp5.addSlider("bg_gray").setPosition(10,sp).setRange( 0, 255 ); sp += spgap;
   sp += spgap;
   cp5.addSlider("ball_radius").setPosition(10,sp).setRange( 5, 100 ); sp += spgap;
   cp5.addSlider("ball_spacing").setPosition(10,sp).setRange( 30, 200 ); sp += spgap;
-  cp5.addSlider("total_depth").setPosition(10,sp).setRange( 1000, 10000 ); sp += spgap;
+  cp5.addSlider("total_depth").setPosition(10,sp).setRange( 100, 5000 ); sp += spgap;
   sp += spgap;
   cp5.addSlider("xlayers").setPosition(10,sp).setRange( 0, 4 ); sp += spgap;
   cp5.addSlider("ylayers").setPosition(10,sp).setRange( 0, 4 ); sp += spgap;
-  cp5.addSlider("zlayers").setPosition(10,sp).setRange( 1, 10 ); sp += spgap;
+  cp5.addSlider("zlayers").setPosition(10,sp).setRange( 0, 15 ); sp += spgap;
   sp += spgap;
   cp5.addSlider("rotation_speed").setPosition(10,sp).setRange( 0, 0.01 ); sp += spgap;
   
