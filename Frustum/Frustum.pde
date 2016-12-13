@@ -15,7 +15,7 @@ float total_depth = 5000;
 
 int xlayers = 1;
 int ylayers = 1;
-int zlayers = 0;
+int zlayers = 2;
 
 float rotation_speed = 0.002;
 
@@ -24,6 +24,7 @@ void setup() {
   size( 1280, 600, P3D);
   
   cp5 = new ControlP5(this);
+  //cp5.hide();
   
   int spgap = 16;
   int sp = 10;
@@ -41,8 +42,6 @@ void setup() {
   cp5.addSlider("zlayers").setPosition(10,sp).setRange( 0, 15 ); sp += spgap;
   sp += spgap;
   cp5.addSlider("rotation_speed").setPosition(10,sp).setRange( 0, 0.01 ); sp += spgap;
-  
-  cp5.hide();
   
 }
 
