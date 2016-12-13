@@ -15,7 +15,7 @@ float total_depth = 5000;
 
 int xlayers = 1;
 int ylayers = 1;
-int zlayers = 8;
+int zlayers = 0;
 
 float rotation_speed = 0.002;
 
@@ -42,6 +42,7 @@ void setup() {
   sp += spgap;
   cp5.addSlider("rotation_speed").setPosition(10,sp).setRange( 0, 0.01 ); sp += spgap;
   
+  cp5.hide();
   
 }
 
@@ -93,9 +94,11 @@ void draw() {
   popMatrix();
   
   // overlay
-  hint(DISABLE_DEPTH_TEST);
-  frustumReset();
-  fill( 0,50 );
-  rect( 0,0,190,height );
+  if ( cp5.isVisible() ) {
+    hint(DISABLE_DEPTH_TEST);
+    frustumReset();
+    fill( 0,50 );
+    rect( 0,0,190,height );
+  }
   
 }
