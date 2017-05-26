@@ -65,8 +65,8 @@ void draw() {
    // draw world box
    noFill();
    stroke( 200 );
-   box( world_size * 2 );
-    
+   //box( world_size * 2 );
+   Space(world_size * 2);
    // now we can draw objects in the world
    noStroke();
    pushMatrix();
