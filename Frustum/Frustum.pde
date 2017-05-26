@@ -1,6 +1,13 @@
+import KinectPV2.KJoint;
+import KinectPV2.*;
 import controlP5.*;
 
 ControlP5 cp5;
+
+KinectPV2 kinect;
+int depth = 600;
+float zVal = 1;
+float rotX = PI;
 
 // default configuration
 
@@ -42,10 +49,38 @@ void setup() {
   cp5.addSlider("zlayers").setPosition(10,sp).setRange( 0, 15 ); sp += spgap;
   sp += spgap;
   cp5.addSlider("rotation_speed").setPosition(10,sp).setRange( 0, 0.01 ); sp += spgap;
-  
+  sp += spgap;
+  cp5.addSlider("depth").setPosition(10,sp).setRange(0,1000); sp += spgap;
+ 
+  kinect = new KinectPV2(this);
+
+  kinect.enableColorImg(true);
+
+  //enable 3d  with (x,y,z) position
+  kinect.enableSkeleton3DMap(true);
+
+  kinect.init();
 }
 
 void draw() {
+  float head_x=0.0;
+  float head_y=0.0;
+  float head_z=0.0;
+  float p_x=0.0;
+  float p_y=0.0;
+  float p_h_x=0.0;
+  float p_h_y=0.0;  
+  ArrayList skeletonArray =  kinect.getSkeleton3d();
+    //individual JOINTS
+  for (int i = 0; i < skeletonArray.size(); i++) {
+    KSkeleton skeleton = (KSkeleton) skeletonArray.get(0);
+    if (skeleton.isTracked()) {
+      KJoint[] joints = skeleton.getJoints();
+      head_x=joints[KinectPV2.JointType_Head].getX();
+      head_y=joints[KinectPV2.JointType_Head].getY();
+      head_z=joints[KinectPV2.JointType_Head].getZ();
+    }
+  }
   
   noFill();
   background( bg_gray );
@@ -53,8 +88,12 @@ void draw() {
   hint(ENABLE_DEPTH_TEST);
   //lights();
   //directionalLight( 51, 102, 126, -1, -1, 0 );
-
-  PVector fscale = frustumizer( ( mouseX - width * 0.5 ) * 2, ( mouseY - height * 0.5 ) * 2, world_size );
+  p_x=( mouseX - width * 0.5 ) * 2;
+  p_y=( mouseY - height * 0.5 ) * 2;
+  //PVector fscale = frustumizer( p_x, p_y, world_size );
+  p_h_x=width * head_x;
+  p_h_y=height * head_y;
+  PVector fscale = frustumizer( p_h_x, p_h_y, world_size );
   
   pushMatrix();
   
@@ -100,4 +139,19 @@ void draw() {
     rect( 0,0,190,height );
   }
   
+  /* 
+  //Debug Info
+  textSize(32);
+  fill(255, 0, 0);
+  text(frameRate, 400, 40);
+  text(head_x, 400, 80);
+  text(head_y, 400, 120);
+  text(head_z, 400, 160);
+  
+  text(p_x, 200, 80);
+  text(p_y, 200, 120);
+  
+  text(p_h_x, 600, 80);
+  text(p_h_y, 600, 120);
+  */
 }
